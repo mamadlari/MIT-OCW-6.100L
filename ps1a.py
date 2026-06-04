@@ -32,9 +32,8 @@ r=0.05
 ###############################################################################################
 
 months=0
-print(months)
-while amount_saved < cost_of_dream_home:
-    amount_saved = ( amount_saved*(r/12) + (portion_saved*yearly_salary)/12 )
+while amount_saved < portion_down_payment:
+    amount_saved += amount_saved*(r/12) + (portion_saved*yearly_salary)/12
     months+=1
     
-print("after",months,"later you can buy your dream home !! :) ")
+print("after",months,"months later you can buy your dream home !! :) ")
