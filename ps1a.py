@@ -2,7 +2,10 @@
 ## Name:
 ## Time Spent:
 ## Collaborators:
+    
+## ------------------ Buying Dream House ----------------------- ##
 
+ 
 ##################################################################################
 ## Get user input for yearly_salary, portion_saved and cost_of_dream_home below ##
 ##################################################################################
@@ -17,8 +20,15 @@ cost_of_dream_home=float(input("How much does your deam house cost ? : "))
 ## Initialize other variables you need (if any) for your program below ##
 #########################################################################
 
+## Initialize  house down payment , interest and monthly saving ##
+
+portion_down_payment=0.25*cost_of_dream_home
+amount_saved=0.0
+r=0.05
 
 
 ###############################################################################################
 ## Determine how many months it would take to get the down payment for your dream home below ## 
 ###############################################################################################
+
+
