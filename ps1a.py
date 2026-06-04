@@ -31,4 +31,10 @@ r=0.05
 ## Determine how many months it would take to get the down payment for your dream home below ## 
 ###############################################################################################
 
-
+months=0
+print(months)
+while amount_saved < cost_of_dream_home:
+    amount_saved = ( amount_saved*(r/12) + (portion_saved*yearly_salary)/12 )
+    months+=1
+    
+print("after",months,"later you can buy your dream home !! :) ")
