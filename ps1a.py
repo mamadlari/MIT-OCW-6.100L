@@ -1,7 +1,7 @@
 ## 6.100A PSet 1: Part A
-## Name:
-## Time Spent:
-## Collaborators:
+## Name:Mohammad Tolooei
+## Time Spent:1 hour
+## Collaborators:No One
     
 ## ------------------ Buying Dream House ----------------------- ##
 
