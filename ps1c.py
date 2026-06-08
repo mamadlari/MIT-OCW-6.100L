@@ -22,15 +22,6 @@ steps=0
 ## Determine the lowest rate of return needed to get the down payment for your dream home below ##
 ##################################################################################################
 
-# def is_less(amount_saved_after_36_months):
-#     print("in is_less function")
-#     print("amount_saved_after_36_months: ",amount_saved_after_36_months)
-#     print("portion_down_payment: ",portion_down_payment)
-#     if amount_saved_after_36_months<(portion_down_payment-100):
-#         return True
-#     else: return False
-
-
 def Enough(amount_saved_after_36_months):
     if (portion_down_payment-100) <= amount_saved_after_36_months <= (portion_down_payment+100):
         return "Acceptable"
