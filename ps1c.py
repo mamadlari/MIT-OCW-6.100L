@@ -7,13 +7,24 @@
 ## Get user input for initial_deposit below ##
 ##############################################
 
+initial_deposit=float(input("whats is your initial amount in your savings account ? : "))
 
 #########################################################################
 ## Initialize other variables you need (if any) for your program below ##
 #########################################################################
 
+cost_of_dream_home= 800000.0
+portion_down_payment=0.25*cost_of_dream_home
+amount_saved=0.0
+steps=0
 
 ##################################################################################################
 ## Determine the lowest rate of return needed to get the down payment for your dream home below ##
 ##################################################################################################
+
+def is_less(amount_saved_after_36_months):
+    if amount_saved_after_36_months<(portion_down_payment-100):
+        return True
+    else: return False
+
 
