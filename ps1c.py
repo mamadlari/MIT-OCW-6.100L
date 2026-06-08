@@ -17,12 +17,13 @@ cost_of_dream_home= 800000.0
 portion_down_payment=0.25*cost_of_dream_home
 amount_saved=0.0
 steps=0
-
+months=36
 ##################################################################################################
 ## Determine the lowest rate of return needed to get the down payment for your dream home below ##
 ##################################################################################################
 
 def Enough(amount_saved_after_36_months):
+    
     if (portion_down_payment-100) <= amount_saved_after_36_months <= (portion_down_payment+100):
         return "Acceptable"
     elif amount_saved_after_36_months < (portion_down_payment-100):
@@ -30,18 +31,17 @@ def Enough(amount_saved_after_36_months):
     else: return "more_than"
 
 def Answer(r,amount_saved):
-     for month in range(1,37):
-         amount_saved+=initial_deposit*(1+r/12)**month
-     amount_saved_after_36_months=amount_saved
+    
+     amount_saved_after_36_months=initial_deposit*(1+(r/12))**months
      return Enough(amount_saved_after_36_months) 
      
 def Acceptable_r(high,low):
      global steps
      steps+=1
      r=(low+high)/2.0
-     if steps==17:
-         exit()
      ans=Answer(r, amount_saved)
+     if steps==30:
+         exit()
      match ans:
          case "Acceptable":
              return r
