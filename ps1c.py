@@ -36,6 +36,7 @@ def Answer(r,amount_saved):
      return Enough(amount_saved_after_36_months) 
      
 def Acceptable_r(high,low):
+    
      if initial_deposit>=portion_down_payment:
         return 0.0
      global steps
