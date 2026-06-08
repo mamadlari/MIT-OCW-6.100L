@@ -35,26 +35,25 @@ def Answer(r,amount_saved):
      amount_saved_after_36_months=initial_deposit*(1+(r/12))**months
      return Enough(amount_saved_after_36_months) 
      
-def Acceptable_r(high,low):
+def Acceptable_r(high,low,steps):
      
      if initial_deposit>=portion_down_payment:
         return 0.0
-     global steps
      steps+=1
      r=(low+high)/2.0
      ans=Answer(r, amount_saved)
      if r==1 and ans!="Acceptable":
-         return None
+         return (None,0)
      match ans:
          case "Acceptable":
-             return r
+             return (r,steps)
          case "less_than":
              low=r
-             return Acceptable_r(high, low)
+             return Acceptable_r(high, low,steps)
          case "more_than":
              high=r
-             return Acceptable_r(high, low)
+             return Acceptable_r(high, low,steps)
          case _:
-             return None
-r=Acceptable_r(1.0, 0.0)
+             return (None,0)
+(r,steps)=Acceptable_r(1.0, 0.0,steps)
 print("r = ",r,"and steps in bisections search is : ",steps)
