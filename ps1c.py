@@ -42,3 +42,16 @@ def Answer(r,amount_saved):
          return "Acceptable"
      elif is_less(amount_saved_after_36_months):
          return "Less_than"
+     
+def Acceptable_r(high,low):
+     global steps
+     steps+=1
+     r=(low+high)/2.0
+     if Answer(r,amount_saved)== "Acceptable":
+         return r
+     elif Answer(r, amount_saved)=="Less_than":
+         low=r
+         return Acceptable_r(high, low)
+     else:
+         high=r
+         return Acceptable_r(high, low)
