@@ -22,36 +22,46 @@ steps=0
 ## Determine the lowest rate of return needed to get the down payment for your dream home below ##
 ##################################################################################################
 
-def is_less(amount_saved_after_36_months):
-    if amount_saved_after_36_months<(portion_down_payment-100):
-        return True
-    else: return False
+# def is_less(amount_saved_after_36_months):
+#     print("in is_less function")
+#     print("amount_saved_after_36_months: ",amount_saved_after_36_months)
+#     print("portion_down_payment: ",portion_down_payment)
+#     if amount_saved_after_36_months<(portion_down_payment-100):
+#         return True
+#     else: return False
 
 
 def Enough(amount_saved_after_36_months):
     if (portion_down_payment-100) <= amount_saved_after_36_months <= (portion_down_payment+100):
-        return True
-    else: return False
-
+        return "Acceptable"
+    elif amount_saved_after_36_months < (portion_down_payment-100):
+        return "less_than"
+    else: return "more_than"
 
 def Answer(r,amount_saved):
      for month in range(1,37):
          amount_saved+=initial_deposit*(1+r/12)**month
      amount_saved_after_36_months=amount_saved
-     if Enough(amount_saved_after_36_months):
-         return "Acceptable"
-     elif is_less(amount_saved_after_36_months):
-         return "Less_than"
+     return Enough(amount_saved_after_36_months) 
      
 def Acceptable_r(high,low):
      global steps
      steps+=1
      r=(low+high)/2.0
-     if Answer(r,amount_saved)== "Acceptable":
-         return r
-     elif Answer(r, amount_saved)=="Less_than":
-         low=r
-         return Acceptable_r(high, low)
-     else:
-         high=r
-         return Acceptable_r(high, low)
+     if steps==17:
+         exit()
+     ans=Answer(r, amount_saved)
+     match ans:
+         case "Acceptable":
+             return r
+         case "less_than":
+             low=r
+             return Acceptable_r(high, low)
+         case "more_than":
+             high=r
+             return Acceptable_r(high, low)
+         case _:
+             return None
+
+r=Acceptable_r(1.0, 0.0)
+print("r = ",r,"and steps in bisections search is : ",steps)
