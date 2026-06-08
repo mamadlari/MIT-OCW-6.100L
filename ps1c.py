@@ -32,3 +32,13 @@ def Enough(amount_saved_after_36_months):
     if (portion_down_payment-100) <= amount_saved_after_36_months <= (portion_down_payment+100):
         return True
     else: return False
+
+
+def Answer(r,amount_saved):
+     for month in range(1,37):
+         amount_saved+=initial_deposit*(1+r/12)**month
+     amount_saved_after_36_months=amount_saved
+     if Enough(amount_saved_after_36_months):
+         return "Acceptable"
+     elif is_less(amount_saved_after_36_months):
+         return "Less_than"
