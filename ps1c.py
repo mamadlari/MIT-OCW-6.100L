@@ -28,3 +28,7 @@ def is_less(amount_saved_after_36_months):
     else: return False
 
 
+def Enough(amount_saved_after_36_months):
+    if (portion_down_payment-100) <= amount_saved_after_36_months <= (portion_down_payment+100):
+        return True
+    else: return False
