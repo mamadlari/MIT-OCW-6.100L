@@ -60,7 +60,6 @@ def has_player_won(secret_word, letters_guessed):
         for letters in letters_guessed:
             if letter==letters:
                 corrent_letters+=1
-                letters_guessed[letters]=-1
     if secret_word.len()==corrent_letters:
         return True
     else: return False
