@@ -77,9 +77,9 @@ def get_word_progress(secret_word, letters_guessed):
     words_guessed=""
     for letter in secret_word:
         star=True
-        for letters in letters_guessed:
-            if letter==letters:
-                words_guessed+=letters
+        for Letter in letters_guessed:
+            if letter==Letter:
+                words_guessed+=Letter
                 star=False
         if star==True:
             words_guessed+="*"
@@ -96,7 +96,6 @@ def get_available_letters(letters_guessed):
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     pass
-
 
 
 def hangman(secret_word, with_help):
