@@ -15,23 +15,24 @@ initial_deposit=float(input("whats is your initial amount in your savings accoun
 
 cost_of_dream_home= 800000.0
 portion_down_payment=0.25*cost_of_dream_home
-amount_saved=0.0
 steps=0
 months=36
+
 ##################################################################################################
 ## Determine the lowest rate of return needed to get the down payment for your dream home below ##
 ##################################################################################################
 
+
 def Enough(amount_saved_after_36_months):
-    
+   
     if (portion_down_payment-100) <= amount_saved_after_36_months <= (portion_down_payment+100):
         return "Acceptable"
     elif amount_saved_after_36_months < (portion_down_payment-100):
         return "less_than"
     else: return "more_than"
 
-def Answer(r,amount_saved):
-    
+def Answer(r):
+   
      amount_saved_after_36_months=initial_deposit*(1+(r/12))**months
      return Enough(amount_saved_after_36_months) 
      
@@ -43,7 +44,7 @@ def Acceptable_r(high,low,steps):
         return (0.0,steps)
     
      r=(low+high)/2.0
-     ans=Answer(r, amount_saved)
+     ans=Answer(r)
      
      if r==1 and ans!="Acceptable":
          return (None,steps)
