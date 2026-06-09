@@ -1,7 +1,7 @@
 ## 6.100A PSet 1: Part B
-## Name:
-## Time Spent:
-## Collaborators:
+## Name:Mohammad Tolooei
+## Time Spent:30 Minutes
+## Collaborators:No One
 
 ##########################################################################################
 ## Get user input for yearly_salary, portion_saved, cost_of_dream_home, semi_annual_raise below ##

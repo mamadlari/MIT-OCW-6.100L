@@ -1,7 +1,7 @@
 ## 6.100A PSet 1: Part C
-## Name:
-## Time Spent:
-## Collaborators:
+## Name:Mohammad Tolooei
+## Time Spent:3
+## Collaborators:No One
 
 ##############################################
 ## Get user input for initial_deposit below ##
@@ -31,19 +31,23 @@ def Enough(amount_saved_after_36_months):
     else: return "more_than"
 
 def Answer(r,amount_saved):
-     
+    
      amount_saved_after_36_months=initial_deposit*(1+(r/12))**months
      return Enough(amount_saved_after_36_months) 
      
 def Acceptable_r(high,low,steps):
+    
+     steps+=1
      
      if initial_deposit>=portion_down_payment:
-        return 0.0
-     steps+=1
+        return (0.0,steps)
+    
      r=(low+high)/2.0
      ans=Answer(r, amount_saved)
+     
      if r==1 and ans!="Acceptable":
-         return (None,0)
+         return (None,steps)
+     
      match ans:
          case "Acceptable":
              return (r,steps)
@@ -54,6 +58,8 @@ def Acceptable_r(high,low,steps):
              high=r
              return Acceptable_r(high, low,steps)
          case _:
-             return (None,0)
+             return (None,steps)
+         
+            
 (r,steps)=Acceptable_r(1.0, 0.0,steps)
 print("r = ",r,"and steps in bisections search is : ",steps)
