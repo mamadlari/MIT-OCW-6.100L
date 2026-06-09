@@ -53,7 +53,7 @@ def Enough(amount_saved_after_36_months):
         return "less_than"
     else: return "more_than"
 
-def Anwser(r):
+def Answer(r):
      """
      Checks amount_saved_after_36_months with compound interest formula is enough or not
     
@@ -96,7 +96,7 @@ def Acceptable_r(high,low,steps):
          
          r (float): Annual interest rate (guess)
          
-         ans (string): The return value of a Anwser(r) funcction
+         ans (string): The return value of a Answer(r) funcction
          
      Returns (a tuple):
          
@@ -104,7 +104,7 @@ def Acceptable_r(high,low,steps):
      """
      steps+=1
      r=(low+high)/2.0
-     ans=Anwser(r)
+     ans=Answer(r)
      match ans:
          case "Acceptable":
              return (r,steps)
@@ -121,7 +121,7 @@ def Acceptable_r(high,low,steps):
 if initial_deposit>=portion_down_payment:
    (r,steps)=(0.0,steps)
    print("r = ",r,"and steps in bisections search is : ",steps)
-elif Anwser(1)=="less_than":
+elif Answer(1)=="less_than":
     (r,steps)=(None,steps)
     print("r = ",r,"and steps in bisections search is : ",steps)
 else:
