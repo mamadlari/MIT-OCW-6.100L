@@ -60,7 +60,7 @@ def has_player_won(secret_word, letters_guessed):
         for letters in letters_guessed:
             if letter==letters:
                 corrent_letters+=1
-    if secret_word.len()==corrent_letters:
+    if len(secret_word)==corrent_letters:
         return True
     else: return False
 
@@ -74,7 +74,7 @@ def get_word_progress(secret_word, letters_guessed):
         which letters in secret_word have not been guessed so far
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    
     
 def get_available_letters(letters_guessed):
     """
