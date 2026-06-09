@@ -95,7 +95,15 @@ def get_available_letters(letters_guessed):
       alphabetical order
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    available_letters=""
+    for letter in string.ascii_lowercase:
+        available=True
+        for Letter in letters_guessed:
+            if letter == Letter:
+                available=False
+        if available==True:
+            available_letters+=letter
+    return available_letters
 
 
 def hangman(secret_word, with_help):
