@@ -114,7 +114,11 @@ def Input(with_help):
      if with_help==True and letter=='!':
          return letter
     return False
-
+def repetitive(letters_guessed,letter):
+    for char in letters_guessed:
+        if letter==char:
+            return True
+    return False
 def hangman(secret_word, with_help):
     """
     secret_word: string, the secret word to guess.
@@ -162,10 +166,8 @@ def hangman(secret_word, with_help):
     while guesses!=0:
         print("You have",guesses,"guesses left.")
         print("Available letters:",get_available_letters(letters_guessed))
-    letter=Input(with_help)
-    #if letter==False:
-       # print("Oops! That is not a valid letter. Please input a letter from the alphabet:",get_word_progress(secret_word, letters_guessed))
-
+        letter=Input(with_help)
+        
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the lines to test
 
