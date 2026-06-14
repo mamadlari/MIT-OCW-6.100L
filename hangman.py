@@ -64,6 +64,7 @@ def has_player_won(secret_word, letters_guessed):
         return True
     else: return False
 
+
 def get_word_progress(secret_word, letters_guessed):
     """
     secret_word: string, the lowercase word the user is guessing
@@ -85,6 +86,7 @@ def get_word_progress(secret_word, letters_guessed):
             words_guessed+="*"
     return words_guessed
     
+
 def get_available_letters(letters_guessed):
     """
     letters_guessed: list (of lowercase letters), the letters that have been
@@ -105,6 +107,7 @@ def get_available_letters(letters_guessed):
             available_letters+=letter
     return available_letters
 
+
 def Input(with_help):
     letter=input("Please guess a letter: ")
     if len(letter)==1:
@@ -114,11 +117,27 @@ def Input(with_help):
      if with_help==True and letter=='!':
          return letter
     return False
+
+
 def repetitive(letters_guessed,letter):
     for char in letters_guessed:
         if letter==char:
             return True
     return False
+
+
+def In_secret_word(letter,secret_word):
+   if letter in secret_word:
+            return True
+   return False
+
+def consonants(letter):
+    vowels_letter=('e','a','u','i','o')
+    if letter in vowels_letter:
+        return False
+    else : return True
+    
+
 def hangman(secret_word, with_help):
     """
     secret_word: string, the secret word to guess.
@@ -164,10 +183,26 @@ def hangman(secret_word, with_help):
     print("Welcome to Hangman!")
     print("I am thinking of a word that is ",len(secret_word),"letters long.")
     while guesses!=0:
+        print("--------------")
         print("You have",guesses,"guesses left.")
         print("Available letters:",get_available_letters(letters_guessed))
         letter=Input(with_help)
-        
+        if letter==False:
+         print("Oops! That is not a valid letter. Please input a letter from the alphabet :",get_word_progress(secret_word, letters_guessed))
+        else:
+            if letter != '!':
+                if repetitive(letters_guessed, letter):
+                 print("Oops! You've already guessed that letter :",get_word_progress(secret_word, letters_guessed))
+                else:
+                    if In_secret_word(letter, secret_word):
+                        letters_guessed+=letter
+                        print("Good guess :",get_word_progress(secret_word, letters_guessed))
+                    else:
+                        print("Oops! That letter is not in my word:",get_word_progress(secret_word, letters_guessed))
+                        if consonants(letter):
+                         guesses-=1
+                        else:
+                            guesses-=2
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the lines to test
 
