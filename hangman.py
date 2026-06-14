@@ -105,6 +105,15 @@ def get_available_letters(letters_guessed):
             available_letters+=letter
     return available_letters
 
+def Input(with_help):
+    letter=input("Please guess a letter: ")
+    if len(letter)==1:
+     if letter.isalpha()==True:
+         letter=letter.lower()
+         return letter
+     if with_help==True and letter=='!':
+         return letter
+    return False
 
 def hangman(secret_word, with_help):
     """
@@ -146,9 +155,9 @@ def hangman(secret_word, with_help):
     Follows the other limitations detailed in the problem write-up.
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
-
+    letter=Input(with_help)
+    if letter==False:
+        print("Oops! That is not a valid letter. Please input a letter from the alphabet:",get_word_progress(secret_word, letters_guessed))
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the lines to test
