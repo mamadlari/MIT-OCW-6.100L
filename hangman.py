@@ -157,6 +157,11 @@ def hangman(secret_word, with_help):
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     guesses=10
     letters_guessed=""
+    print("Welcome to Hangman!")
+    print("I am thinking of a word that is ",len(secret_word),"letters long.")
+    while guesses!=0:
+        print("You have",guesses,"guesses left.")
+        print("Available letters:",get_available_letters(letters_guessed))
     letter=Input(with_help)
     #if letter==False:
        # print("Oops! That is not a valid letter. Please input a letter from the alphabet:",get_word_progress(secret_word, letters_guessed))
