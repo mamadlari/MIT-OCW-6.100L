@@ -155,9 +155,11 @@ def hangman(secret_word, with_help):
     Follows the other limitations detailed in the problem write-up.
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
+    guesses=10
+    letters_guessed=""
     letter=Input(with_help)
-    if letter==False:
-        print("Oops! That is not a valid letter. Please input a letter from the alphabet:",get_word_progress(secret_word, letters_guessed))
+    #if letter==False:
+       # print("Oops! That is not a valid letter. Please input a letter from the alphabet:",get_word_progress(secret_word, letters_guessed))
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the lines to test
@@ -179,5 +181,7 @@ if __name__ == "__main__":
     # It doesn't matter if the lines above are commented in or not
     # when you submit your pset. However, please run ps2_student_tester.py
     # one more time before submitting to make sure all the tests pass.
-    pass
+    secret_word = "tact"
+    with_help = False
+    hangman(secret_word, with_help)
 
