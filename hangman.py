@@ -257,6 +257,18 @@ def hangman(secret_word, with_help):
                         guesses_remaining -= 1
                     else:
                         guesses_remaining -= 2
+        if has_player_won(secret_word, letters_guessed):
+            total_score = (guesses_remaining + 4 * unique(secret_word)) + (
+                3 * len(secret_word)
+            )
+            print(
+                "--------------\nCongratulations, you won!\nYour total score for this game is :",
+                total_score,
+            )
+            return
+    print(
+        f"--------------\nSorry, you ran out of guesses. The word was {secret_word} ."
+    )
 
 
 # When you've completed your hangman function, scroll down to the bottom
@@ -280,5 +292,5 @@ if __name__ == "__main__":
     # when you submit your pset. However, please run ps2_student_tester.py
     # one more time before submitting to make sure all the tests pass.
     secret_word = "tact"
-    with_help = True
+    with_help = False
     hangman(secret_word, with_help)
