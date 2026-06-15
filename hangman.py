@@ -12,6 +12,7 @@ import string
 
 WORDLIST_FILENAME = "words.txt"
 
+
 def load_words():
     """
     returns: list, a list of valid words. Words are strings of lowercase letters.
@@ -21,13 +22,14 @@ def load_words():
     """
     print("Loading word list from file...")
     # inFile: file
-    inFile = open(WORDLIST_FILENAME, 'r')
+    inFile = open(WORDLIST_FILENAME, "r")
     # line: string
     line = inFile.readline()
     # wordlist: list of strings
     wordlist = line.split()
     print(" ", len(wordlist), "words loaded.")
     return wordlist
+
 
 def choose_word(wordlist):
     """
@@ -37,6 +39,7 @@ def choose_word(wordlist):
     """
     return random.choice(wordlist)
 
+
 # -----------------------------------
 # END OF HELPER CODE
 # -----------------------------------
@@ -44,6 +47,7 @@ def choose_word(wordlist):
 
 # Load the list of words to be accessed from anywhere in the program
 wordlist = load_words()
+
 
 def has_player_won(secret_word, letters_guessed):
     """
@@ -55,13 +59,14 @@ def has_player_won(secret_word, letters_guessed):
         False otherwise
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    corrent_letters=0
+    corrent_letters = 0
     for letter in secret_word:
-       if letter in letters_guessed:
-                corrent_letters+=1
-    if len(secret_word)==corrent_letters:
+        if letter in letters_guessed:
+            corrent_letters += 1
+    if len(secret_word) == corrent_letters:
         return True
-    else: return False
+    else:
+        return False
 
 
 def get_word_progress(secret_word, letters_guessed):
@@ -74,16 +79,16 @@ def get_word_progress(secret_word, letters_guessed):
         which letters in secret_word have not been guessed so far
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    words_guessed=""
+    words_guessed = ""
     for letter in secret_word:
-        star=True
+        star = True
         if letter in letters_guessed:
-           words_guessed+=letter
-           star=False
-        if star==True:
-            words_guessed+="*"
+            words_guessed += letter
+            star = False
+        if star == True:
+            words_guessed += "*"
     return words_guessed
-    
+
 
 def get_available_letters(letters_guessed):
     """
@@ -95,52 +100,55 @@ def get_available_letters(letters_guessed):
       alphabetical order
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    available_letters=""
+    available_letters = ""
     for letter in string.ascii_lowercase:
-        available=True
+        available = True
         if letter in letters_guessed:
-            available=False
-        if available==True:
-            available_letters+=letter
+            available = False
+        if available == True:
+            available_letters += letter
     return available_letters
 
 
 def Input(with_help):
-    letter=input("Please guess a letter: ")
-    if len(letter)==1:
-     if letter.isalpha()==True:
-         letter=letter.lower()
-         return letter
-     if with_help==True and letter=='!':
-         return letter
+    letter = input("Please guess a letter: ")
+    if len(letter) == 1:
+        if letter.isalpha() == True:
+            letter = letter.lower()
+            return letter
+        if with_help == True and letter == "!":
+            return letter
     return False
 
 
-def repetitive(letters_guessed,letter):
+def repetitive(letters_guessed, letter):
     for char in letters_guessed:
-        if letter==char:
+        if letter == char:
             return True
     return False
 
 
-def In_secret_word(letter,secret_word):
-   if letter in secret_word:
-            return True
-   return False
+def In_secret_word(letter, secret_word):
+    if letter in secret_word:
+        return True
+    return False
+
 
 def consonants(letter):
-    vowels_letter=('e','a','u','i','o')
+    vowels_letter = ("e", "a", "u", "i", "o")
     if letter in vowels_letter:
         return False
-    else : return True
-    
-def _help(secret_word,available_letters):
-    choose_from=""
+    else:
+        return True
+
+
+def _help(secret_word, available_letters):
+    choose_from = ""
     for letter in available_letters:
         if letter in secret_word:
-            choose_from+=letter
-    new=random.randint(0, len(choose_from)-1)
-    revealed_letter=choose_from[new]
+            choose_from += letter
+    new = random.randint(0, len(choose_from) - 1)
+    revealed_letter = choose_from[new]
     return revealed_letter
 
 
@@ -184,31 +192,61 @@ def hangman(secret_word, with_help):
     Follows the other limitations detailed in the problem write-up.
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    guesses=10
-    letters_guessed=""
+    guesses = 10
+    letters_guessed = ""
     print("Welcome to Hangman!")
-    print("I am thinking of a word that is ",len(secret_word),"letters long.")
-    while guesses!=0:
+    print(
+        "I am thinking of a word that is ", len(secret_word), "letters long."
+    )
+    while guesses != 0:
         print("--------------")
-        print("You have",guesses,"guesses left.")
-        print("Available letters:",get_available_letters(letters_guessed))
-        letter=Input(with_help)
-        if letter==False:
-         print("Oops! That is not a valid letter. Please input a letter from the alphabet :",get_word_progress(secret_word, letters_guessed))
+        print("You have", guesses, "guesses left.")
+        print("Available letters:", get_available_letters(letters_guessed))
+        letter = Input(with_help)
+        if letter == False:
+            print(
+                "Oops! That is not a valid letter. Please input a letter from the alphabet :",
+                get_word_progress(secret_word, letters_guessed),
+            )
         else:
-            if letter != '!':
+            if letter != "!":
                 if repetitive(letters_guessed, letter):
-                 print("Oops! You've already guessed that letter :",get_word_progress(secret_word, letters_guessed))
+                    print(
+                        "Oops! You've already guessed that letter :",
+                        get_word_progress(secret_word, letters_guessed),
+                    )
                 else:
                     if In_secret_word(letter, secret_word):
-                        letters_guessed+=letter
-                        print("Good guess :",get_word_progress(secret_word, letters_guessed))
+                        letters_guessed += letter
+                        print(
+                            "Good guess :",
+                            get_word_progress(secret_word, letters_guessed),
+                        )
                     else:
-                        print("Oops! That letter is not in my word:",get_word_progress(secret_word, letters_guessed))
+                        print(
+                            "Oops! That letter is not in my word:",
+                            get_word_progress(secret_word, letters_guessed),
+                        )
                         if consonants(letter):
-                         guesses-=1
+                            guesses -= 1
                         else:
-                            guesses-=2
+                            guesses -= 2
+            else:
+                if guesses >= 3:
+                    revealed_letter = _help(
+                        secret_word, get_available_letters(letters_guessed)
+                    )
+                    letters_guessed += revealed_letter
+                    print("Letter revealed :", revealed_letter)
+                    print(get_word_progress(secret_word, letters_guessed))
+                    guesses -= 3
+                else:
+                    print(
+                        "Oops! Not enough guesses left :",
+                        get_word_progress(secret_word, letters_guessed),
+                    )
+
+
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the lines to test
 
@@ -230,6 +268,5 @@ if __name__ == "__main__":
     # when you submit your pset. However, please run ps2_student_tester.py
     # one more time before submitting to make sure all the tests pass.
     secret_word = "tact"
-    with_help = False
+    with_help = True
     hangman(secret_word, with_help)
-
