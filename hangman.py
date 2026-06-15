@@ -1,7 +1,7 @@
 # Problem Set 2, hangman.py
-# Name:
-# Collaborators:
-# Time spent:
+# Name:Mohammad Tolooei
+# Collaborators:No One
+# Time spent:4 hour
 
 import random
 import string
@@ -110,6 +110,7 @@ def get_available_letters(letters_guessed):
     return available_letters
 
 
+## User input ##
 def _input():
     letter = input("Please guess a letter: ")
     if len(letter) == 1:
@@ -121,6 +122,7 @@ def _input():
     return False
 
 
+## if letter is repetitive return True ##
 def repetitive(letters_guessed, letter):
     for char in letters_guessed:
         if letter == char:
@@ -128,12 +130,14 @@ def repetitive(letters_guessed, letter):
     return False
 
 
+## if letter in secret word return True ##
 def In_secret_word(letter, secret_word):
     if letter in secret_word:
         return True
     return False
 
 
+## if letter is consonats return True ##
 def consonants(letter):
     vowels_letter = ("e", "a", "u", "i", "o")
     if letter in vowels_letter:
@@ -142,6 +146,7 @@ def consonants(letter):
         return True
 
 
+## return random letter in secret word ##
 def _help(secret_word, available_letters):
     choose_from = ""
     for letter in available_letters:
@@ -152,6 +157,7 @@ def _help(secret_word, available_letters):
     return revealed_letter
 
 
+## return len unique letter in secret word ##
 def unique(secret_word):
     unique_letter = ""
     for letter in secret_word:
