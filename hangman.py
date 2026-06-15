@@ -134,6 +134,15 @@ def consonants(letter):
         return False
     else : return True
     
+def _help(secret_word,available_letters):
+    choose_from=""
+    for letter in available_letters:
+        if letter in secret_word:
+            choose_from+=letter
+    new=random.randint(0, len(choose_from)-1)
+    revealed_letter=choose_from[new]
+    return revealed_letter
+
 
 def hangman(secret_word, with_help):
     """
