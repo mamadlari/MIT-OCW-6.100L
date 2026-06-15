@@ -110,13 +110,13 @@ def get_available_letters(letters_guessed):
     return available_letters
 
 
-def Input(with_help):
+def _input():
     letter = input("Please guess a letter: ")
     if len(letter) == 1:
         if letter.isalpha() == True:
             letter = letter.lower()
             return letter
-        if with_help == True and letter == "!":
+        if letter == "!":
             return letter
     return False
 
@@ -202,36 +202,19 @@ def hangman(secret_word, with_help):
         print("--------------")
         print("You have", guesses, "guesses left.")
         print("Available letters:", get_available_letters(letters_guessed))
-        letter = Input(with_help)
+        letter = _input()
         if letter == False:
             print(
                 "Oops! That is not a valid letter. Please input a letter from the alphabet :",
                 get_word_progress(secret_word, letters_guessed),
             )
         else:
-            if letter != "!":
-                if repetitive(letters_guessed, letter):
-                    print(
-                        "Oops! You've already guessed that letter :",
-                        get_word_progress(secret_word, letters_guessed),
-                    )
-                else:
-                    if In_secret_word(letter, secret_word):
-                        letters_guessed += letter
-                        print(
-                            "Good guess :",
-                            get_word_progress(secret_word, letters_guessed),
-                        )
-                    else:
-                        print(
-                            "Oops! That letter is not in my word:",
-                            get_word_progress(secret_word, letters_guessed),
-                        )
-                        if consonants(letter):
-                            guesses -= 1
-                        else:
-                            guesses -= 2
-            else:
+            if with_help == False and letter == "!":
+                print(
+                    "Oops! That is not a valid letter.Becuase it isn't a with help game:",
+                    get_word_progress(secret_word, letters_guessed),
+                )
+            elif letter == "!":
                 if guesses >= 3:
                     revealed_letter = _help(
                         secret_word, get_available_letters(letters_guessed)
@@ -245,6 +228,27 @@ def hangman(secret_word, with_help):
                         "Oops! Not enough guesses left :",
                         get_word_progress(secret_word, letters_guessed),
                     )
+            elif repetitive(letters_guessed, letter):
+                print(
+                    "Oops! You've already guessed that letter :",
+                    get_word_progress(secret_word, letters_guessed),
+                )
+            else:
+                if In_secret_word(letter, secret_word):
+                    letters_guessed += letter
+                    print(
+                        "Good guess :",
+                        get_word_progress(secret_word, letters_guessed),
+                    )
+                else:
+                    print(
+                        "Oops! That letter is not in my word:",
+                        get_word_progress(secret_word, letters_guessed),
+                    )
+                    if consonants(letter):
+                        guesses -= 1
+                    else:
+                        guesses -= 2
 
 
 # When you've completed your hangman function, scroll down to the bottom
@@ -268,5 +272,5 @@ if __name__ == "__main__":
     # when you submit your pset. However, please run ps2_student_tester.py
     # one more time before submitting to make sure all the tests pass.
     secret_word = "tact"
-    with_help = True
+    with_help = False
     hangman(secret_word, with_help)
