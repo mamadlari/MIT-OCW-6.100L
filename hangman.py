@@ -152,6 +152,14 @@ def _help(secret_word, available_letters):
     return revealed_letter
 
 
+def unique(secret_word):
+    unique_letter = ""
+    for letter in secret_word:
+        if letter not in unique_letter:
+            unique_letter += letter
+    return len(unique_letter)
+
+
 def hangman(secret_word, with_help):
     """
     secret_word: string, the secret word to guess.
@@ -192,15 +200,15 @@ def hangman(secret_word, with_help):
     Follows the other limitations detailed in the problem write-up.
     """
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    guesses = 10
+    guesses_remaining = 10
     letters_guessed = ""
     print("Welcome to Hangman!")
     print(
         "I am thinking of a word that is ", len(secret_word), "letters long."
     )
-    while guesses != 0:
+    while guesses_remaining != 0:
         print("--------------")
-        print("You have", guesses, "guesses left.")
+        print("You have", guesses_remaining, "guesses left.")
         print("Available letters:", get_available_letters(letters_guessed))
         letter = _input()
         if letter == False:
@@ -215,14 +223,14 @@ def hangman(secret_word, with_help):
                     get_word_progress(secret_word, letters_guessed),
                 )
             elif letter == "!":
-                if guesses >= 3:
+                if guesses_remaining >= 3:
                     revealed_letter = _help(
                         secret_word, get_available_letters(letters_guessed)
                     )
                     letters_guessed += revealed_letter
                     print("Letter revealed :", revealed_letter)
                     print(get_word_progress(secret_word, letters_guessed))
-                    guesses -= 3
+                    guesses_remaining -= 3
                 else:
                     print(
                         "Oops! Not enough guesses left :",
@@ -246,9 +254,9 @@ def hangman(secret_word, with_help):
                         get_word_progress(secret_word, letters_guessed),
                     )
                     if consonants(letter):
-                        guesses -= 1
+                        guesses_remaining -= 1
                     else:
-                        guesses -= 2
+                        guesses_remaining -= 2
 
 
 # When you've completed your hangman function, scroll down to the bottom
@@ -272,5 +280,5 @@ if __name__ == "__main__":
     # when you submit your pset. However, please run ps2_student_tester.py
     # one more time before submitting to make sure all the tests pass.
     secret_word = "tact"
-    with_help = False
+    with_help = True
     hangman(secret_word, with_help)
