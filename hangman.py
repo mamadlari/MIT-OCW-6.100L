@@ -206,7 +206,7 @@ def hangman(secret_word, with_help):
     print(
         "I am thinking of a word that is ", len(secret_word), "letters long."
     )
-    while guesses_remaining != 0:
+    while guesses_remaining > 0:
         print("--------------")
         print("You have", guesses_remaining, "guesses left.")
         print("Available letters:", get_available_letters(letters_guessed))
@@ -249,6 +249,7 @@ def hangman(secret_word, with_help):
                         get_word_progress(secret_word, letters_guessed),
                     )
                 else:
+                    letters_guessed += letter
                     print(
                         "Oops! That letter is not in my word:",
                         get_word_progress(secret_word, letters_guessed),
@@ -277,20 +278,17 @@ def hangman(secret_word, with_help):
 if __name__ == "__main__":
     # To test your game, uncomment the following three lines.
 
-    # secret_word = choose_word(wordlist)
-    # with_help = False
-    # hangman(secret_word, with_help)
-
-    # After you complete with_help functionality, change with_help to True
-    # and try entering "!" as a guess!
-
-    ###############
-
-    # SUBMISSION INSTRUCTIONS
-    # -----------------------
-    # It doesn't matter if the lines above are commented in or not
-    # when you submit your pset. However, please run ps2_student_tester.py
-    # one more time before submitting to make sure all the tests pass.
-    secret_word = "tact"
-    with_help = False
+    secret_word = choose_word(wordlist)
+    with_help = True
     hangman(secret_word, with_help)
+
+# After you complete with_help functionality, change with_help to True
+# and try entering "!" as a guess!
+
+###############
+
+# SUBMISSION INSTRUCTIONS
+# -----------------------
+# It doesn't matter if the lines above are commented in or not
+# when you submit your pset. However, please run ps2_student_tester.py
+# one more time before submitting to make sure all the tests pass.
