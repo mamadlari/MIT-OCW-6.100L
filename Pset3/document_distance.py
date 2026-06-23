@@ -58,14 +58,13 @@ def get_frequencies(input_iterable):
     Note: 
         You can assume that the only kinds of white space in the text documents we provide will be new lines or space(s) between words (i.e. there are no tabs)
     """
-    dict = {}
+    dic = {}
     for element in input_iterable:
-        count = 0
-        for i in range(len(input_iterable)):
-            if element == input_iterable[i]:
-                count += 1
-        dict[element] = count
-    return dict
+        if element not in dic:
+            dic[element] = 1
+        else:
+            dic[element] += 1
+    return dic
 
 
 ### Problem 2: Letter Frequencies ###
@@ -78,10 +77,19 @@ def get_letter_frequencies(word):
         is a letter in word and the corresponding int
         is the frequency of the letter in word
     """
-    pass
+    input_text = text_to_list(word)
+    dic_word = get_frequencies(input_text)
+    dic_letter = {}
+    for word in dic_word:
+        for letter in word:
+            if letter in dic_letter:
+                dic_letter[letter] += 1
+            else:
+                dic_letter[letter] = 1
+    return dic_letter
+    ### Problem 3: Similarity ###
 
 
-### Problem 3: Similarity ###
 def calculate_similarity_score(freq_dict1, freq_dict2):
     """
     The keys of dict1 and dict2 are all lowercase,
@@ -204,10 +212,10 @@ if __name__ == "__main__":
     print(friend_word_freq)   # should print {'hello': 1, 'friends': 1}
 
     # Tests Problem 2: Get Letter Frequencies
-    # freq1 = get_letter_frequencies('hello')
-    # freq2 = get_letter_frequencies('that')
-    # print(freq1)      #  should print {'h': 1, 'e': 1, 'l': 2, 'o': 1}
-    # print(freq2)      #  should print {'t': 2, 'h': 1, 'a': 1}
+    freq1 = get_letter_frequencies('hello')
+    freq2 = get_letter_frequencies('that')
+    print(freq1)  # should print {'h': 1, 'e': 1, 'l': 2, 'o': 1}
+    print(freq2)  # should print {'t': 2, 'h': 1, 'a': 1}
 
     # Tests Problem 3: Similarity
     # test_directory = "tests/student_tests/"
