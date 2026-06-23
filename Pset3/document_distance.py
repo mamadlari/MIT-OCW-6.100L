@@ -55,16 +55,16 @@ def get_frequencies(input_iterable):
         dictionary that maps string:int where each string
         is a letter or word in input_iterable and the corresponding int
         is the frequency of the letter or word in input_iterable
-    Note: 
+    Note:
         You can assume that the only kinds of white space in the text documents we provide will be new lines or space(s) between words (i.e. there are no tabs)
     """
-    dic = {}
+    dict = {}
     for element in input_iterable:
-        if element not in dic:
-            dic[element] = 1
+        if element not in dict:
+            dict[element] = 1
         else:
-            dic[element] += 1
-    return dic
+            dict[element] += 1
+    return dict
 
 
 ### Problem 2: Letter Frequencies ###
@@ -78,16 +78,17 @@ def get_letter_frequencies(word):
         is the frequency of the letter in word
     """
     input_text = text_to_list(word)
-    dic_word = get_frequencies(input_text)
-    dic_letter = {}
-    for word in dic_word:
+    dict_word = get_frequencies(input_text)
+    dict_letter = {}
+    for word in dict_word:
         for letter in word:
-            if letter in dic_letter:
-                dic_letter[letter] += 1
+            if letter in dict_letter:
+                dict_letter[letter] += 1
             else:
-                dic_letter[letter] = 1
-    return dic_letter
-    ### Problem 3: Similarity ###
+                dict_letter[letter] = 1
+    return dict_letter
+
+### Problem 3: Similarity ###
 
 
 def calculate_similarity_score(freq_dict1, freq_dict2):
@@ -114,10 +115,62 @@ def calculate_similarity_score(freq_dict1, freq_dict2):
          all frequencies in both dict1 and dict2.
         Return 1-(DIFF/ALL) rounded to 2 decimal places
     """
-    pass
+    L1, L2, U = [], [], []
+    for element in freq_dict1:
+        for i in range(freq_dict1[element]):
+            L1.append(element)
+    for element in freq_dict2:
+        for i in range(freq_dict2[element]):
+            L2.append(element)
+    for element in L1:
+        if element not in U:
+            U.append(element)
+    for element in L2:
+        if element not in U:
+            U.append(element)
 
+    def δ(e):
+        return abs(count(e, L1) - count(e, L2))
+
+    def σ(e):
+        return count(e, L1) + count(e, L2)
+    sum_δ = 0.0
+    sum_σ = 0.0
+    number = 0
+    for element in U:
+        # print("in for loop : ", number)
+        # print("element: ", element)
+        # print("δ(element): ", δ(element))
+        # print("σ(element: ", σ(element))
+        sum_δ += δ(element)
+        sum_σ += σ(element)
+        result = round(1-(sum_δ/sum_σ), 2)
+        # print("sum_δ: ", sum_δ)
+        # print("sum_σ: ", sum_σ)
+        # print("result: ", result)
+        number += 1
+    return result
+
+
+def count(e, Li):
+    """
+    Returns the frequency of elements in the list.
+
+    Args:
+        e=string,a letter or a word in list
+        Li=list,list of letters or words
+    Returns:
+        int, the frequency of element in the list.
+    """
+    count = 0
+    for element in Li:
+        if element == e:
+            count += 1
+    return count
 
 ### Problem 4: Most Frequent Word(s) ###
+
+
 def get_most_frequent_words(freq_dict1, freq_dict2):
     """
     The keys of dict1 and dict2 are all lowercase,
@@ -218,22 +271,24 @@ if __name__ == "__main__":
     print(freq2)  # should print {'t': 2, 'h': 1, 'a': 1}
 
     # Tests Problem 3: Similarity
-    # test_directory = "tests/student_tests/"
-    # hello_world, hello_friend = load_file(test_directory + 'hello_world.txt'), load_file(test_directory + 'hello_friends.txt')
-    # world, friend = text_to_list(hello_world), text_to_list(hello_friend)
-    # world_word_freq = get_frequencies(world)
-    # friend_word_freq = get_frequencies(friend)
-    # word1_freq = get_letter_frequencies('toes')
-    # word2_freq = get_letter_frequencies('that')
-    # word3_freq = get_frequencies('nah')
-    # word_similarity1 = calculate_similarity_score(word1_freq, word1_freq)
-    # word_similarity2 = calculate_similarity_score(word1_freq, word2_freq)
-    # word_similarity3 = calculate_similarity_score(word1_freq, word3_freq)
-    # word_similarity4 = calculate_similarity_score(world_word_freq, friend_word_freq)
-    # print(word_similarity1)       # should print 1.0
-    # print(word_similarity2)       # should print 0.25
-    # print(word_similarity3)       # should print 0.0
-    # print(word_similarity4)       # should print 0.4
+    test_directory = "tests/student_tests/"
+    hello_world, hello_friend = load_file(
+        test_directory + 'hello_world.txt'), load_file(test_directory + 'hello_friends.txt')
+    world, friend = text_to_list(hello_world), text_to_list(hello_friend)
+    world_word_freq = get_frequencies(world)
+    friend_word_freq = get_frequencies(friend)
+    word1_freq = get_letter_frequencies('toes')
+    word2_freq = get_letter_frequencies('that')
+    word3_freq = get_frequencies('nah')
+    word_similarity1 = calculate_similarity_score(word1_freq, word1_freq)
+    word_similarity2 = calculate_similarity_score(word1_freq, word2_freq)
+    word_similarity3 = calculate_similarity_score(word1_freq, word3_freq)
+    word_similarity4 = calculate_similarity_score(
+        world_word_freq, friend_word_freq)
+    print(word_similarity1)       # should print 1.0
+    print(word_similarity2)       # should print 0.25
+    print(word_similarity3)       # should print 0.0
+    print(word_similarity4)       # should print 0.4
 
     # Tests Problem 4: Most Frequent Word(s)
     # freq_dict1, freq_dict2 = {"hello": 5, "world": 1}, {"hello": 1, "world": 5}
