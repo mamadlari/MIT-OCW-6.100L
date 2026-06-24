@@ -212,8 +212,8 @@ def get_tf(file_path):
         in the document) / (total number of words in the document)
     * Think about how we can use get_frequencies from earlier
     """
-    contents = load_file(file_path)
-    words_list = text_to_list(contents)
+    content = load_file(file_path)
+    words_list = text_to_list(content)
     words_freq_dict = get_frequencies(words_list)
     TF_dict = {}
     total_number_of_words = sum(words_freq_dict.values())
@@ -234,7 +234,33 @@ def get_idf(file_paths):
     with math.log10()
 
     """
-    pass
+    docs = []
+    docs_words_list = []
+    docs_words_freq_list = []
+    IDF_dict = {}
+    U = []  # Totall uniqe words in documents
+    for file_name in file_paths:
+        docs.append(load_file(file_name))
+    for doc in docs:
+        docs_words_list.append(text_to_list(doc))
+    for words_list in docs_words_list:
+        docs_words_freq_list.append(get_frequencies(words_list))
+    for words in docs_words_freq_list[0]:
+        U.append(words)
+    for doc in range(1, len(docs_words_freq_list)):
+        for words in docs_words_freq_list[doc]:
+            if words not in U:
+                U.append(words)
+    print("U:", U)
+    for word in U:
+        count = 0  # number of documents with word w in it
+        print("word:", word)
+        for Di in range(len(docs_words_freq_list)):
+            if word in docs_words_freq_list[Di]:
+                count += 1
+        print("count:", count)
+        IDF_dict[word] = math.log10(len(docs)/count)
+    return IDF_dict
 
 
 def get_tfidf(tf_file_path, idf_file_paths):
@@ -304,17 +330,18 @@ if __name__ == "__main__":
     # print(word_similarity4)       # should print 0.4
 
     # Tests Problem 4: Most Frequent Word(s)
-    freq_dict1, freq_dict2 = {"hello": 5, "world": 1}, {"hello": 1, "world": 5}
-    most_frequent = get_most_frequent_words(freq_dict1, freq_dict2)
-    print(most_frequent)      # should print ["hello", "world"]
+    # freq_dict1, freq_dict2 = {"hello": 5, "world": 1}, {"hello": 1, "world": 5}
+    # most_frequent = get_most_frequent_words(freq_dict1, freq_dict2)
+    # print(most_frequent)      # should print ["hello", "world"]
 
     # Tests Problem 5: Find TF-IDF
-    tf_text_file = 'tests/student_tests/hello_world.txt'
-    # idf_text_files = ['tests/student_tests/hello_world.txt', 'tests/student_tests/hello_friends.txt']
-    tf = get_tf(tf_text_file)
-    # idf = get_idf(idf_text_files)
+    # tf_text_file = 'tests/student_tests/hello_world.txt'
+    idf_text_files = ['tests/student_tests/hello_world.txt',
+                      'tests/student_tests/hello_friends.txt']
+    # tf = get_tf(tf_text_file)
+    idf = get_idf(idf_text_files)
     # tf_idf = get_tfidf(tf_text_file, idf_text_files)
-    # should print {'hello': 0.6666666666666666, 'world': 0.3333333333333333}
-    print(tf)
-    # print(idf)    # should print {'hello': 0.0, 'world': 0.3010299956639812, 'friends': 0.3010299956639812}
+    # print(tf)     # should print {'hello': 0.6666666666666666, 'world': 0.3333333333333333}
+    # should print {'hello': 0.0, 'world': 0.3010299956639812, 'friends': 0.3010299956639812}
+    print(idf)
     # print(tf_idf) # should print [('hello', 0.0), ('world', 0.10034333188799373)]
