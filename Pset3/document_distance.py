@@ -38,10 +38,10 @@ def text_to_list(input_text):
     Returns:
         list representation of input_text, where each word is a different element in the list
     """
-    L = input_text.split(' ')
-    element = '\n'
-    while element in L:
-        L.remove(element)
+    L = input_text.split()
+    # element = '\n'
+    # while element in L:
+    #     L.remove(element)
     return L
 
 ### Problem 1: Get Frequency ###
@@ -289,12 +289,12 @@ if __name__ == "__main__":
     ###############################################################
 
     # Tests Problem 0: Prep Data
-    # test_directory = "tests/student_tests/"
-    # hello_world, hello_friend = load_file(
-    #     test_directory + 'hello_world.txt'), load_file(test_directory + 'hello_friends.txt')
-    # world, friend = text_to_list(hello_world), text_to_list(hello_friend)
-    # print(world)      # should print ['hello', 'world', 'hello']
-    # print(friend)     # should print ['hello', 'friends']
+    test_directory = "tests/student_tests/"
+    hello_world, hello_friend = load_file(
+        test_directory + 'hello_world.txt'), load_file(test_directory + 'hello_friends.txt')
+    world, friend = text_to_list(hello_world), text_to_list(hello_friend)
+    print(world)      # should print ['hello', 'world', 'hello']
+    print(friend)     # should print ['hello', 'friends']
 
     # Tests Problem 1: Get Frequencies
     # test_directory = "tests/student_tests/"
