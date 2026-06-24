@@ -251,14 +251,11 @@ def get_idf(file_paths):
         for words in docs_words_freq_list[doc]:
             if words not in U:
                 U.append(words)
-    print("U:", U)
     for word in U:
         count = 0  # number of documents with word w in it
-        print("word:", word)
         for Di in range(len(docs_words_freq_list)):
             if word in docs_words_freq_list[Di]:
                 count += 1
-        print("count:", count)
         IDF_dict[word] = math.log10(len(docs)/count)
     return IDF_dict
 
@@ -276,7 +273,13 @@ def get_tfidf(tf_file_path, idf_file_paths):
 
         * TF-IDF(i) = TF(i) * IDF(i)
         """
-    pass
+    TF_dict = get_tf(tf_file_path)
+    IDF_dict = get_idf(idf_file_paths)
+    TF_IDF = []
+    for word in TF_dict:
+        TF_IDF.append((word, TF_dict[word]*IDF_dict[word]))
+    TF_IDF.sort(key=lambda x: (x[1], x[0]))
+    return TF_IDF
 
 
 if __name__ == "__main__":
@@ -336,12 +339,13 @@ if __name__ == "__main__":
 
     # Tests Problem 5: Find TF-IDF
     # tf_text_file = 'tests/student_tests/hello_world.txt'
-    idf_text_files = ['tests/student_tests/hello_world.txt',
-                      'tests/student_tests/hello_friends.txt']
+    # idf_text_files = ['tests/student_tests/hello_world.txt',
+    # 'tests/student_tests/hello_friends.txt']
     # tf = get_tf(tf_text_file)
-    idf = get_idf(idf_text_files)
+    # idf = get_idf(idf_text_files)
     # tf_idf = get_tfidf(tf_text_file, idf_text_files)
     # print(tf)     # should print {'hello': 0.6666666666666666, 'world': 0.3333333333333333}
     # should print {'hello': 0.0, 'world': 0.3010299956639812, 'friends': 0.3010299956639812}
-    print(idf)
-    # print(tf_idf) # should print [('hello', 0.0), ('world', 0.10034333188799373)]
+    # print(idf)
+    # should print [('hello', 0.0), ('world', 0.10034333188799373)]
+    # print(tf_idf)
