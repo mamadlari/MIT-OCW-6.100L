@@ -3,8 +3,8 @@
 # Written by: sylvant, muneezap, charz, anabell, nhung, wang19k, asinelni, shahul, jcsands
 
 # Problem Set 3
-# Name:
-# Collaborators:
+# Name:Mohammad Tolooei
+# Collaborators:No One
 
 # Purpose: Check for similarity between two texts by comparing different kinds of word statistics.
 
@@ -39,9 +39,6 @@ def text_to_list(input_text):
         list representation of input_text, where each word is a different element in the list
     """
     L = input_text.split()
-    # element = '\n'
-    # while element in L:
-    #     L.remove(element)
     return L
 
 ### Problem 1: Get Frequency ###
@@ -59,11 +56,11 @@ def get_frequencies(input_iterable):
         You can assume that the only kinds of white space in the text documents we provide will be new lines or space(s) between words (i.e. there are no tabs)
     """
     dict = {}
-    for element in input_iterable:
-        if element not in dict:
-            dict[element] = 1
+    for word in input_iterable:
+        if word not in dict:
+            dict[word] = 1
         else:
-            dict[element] += 1
+            dict[word] += 1
     return dict
 
 
@@ -115,19 +112,21 @@ def calculate_similarity_score(freq_dict1, freq_dict2):
          all frequencies in both dict1 and dict2.
         Return 1-(DIFF/ALL) rounded to 2 decimal places
     """
+    # L1:words(letters) in dict1 according to their frequencies
+    # L2:like L1 but in dict2 and U is list of unique words(letters)
     L1, L2, U = [], [], []
-    for element in freq_dict1:
-        for i in range(freq_dict1[element]):
-            L1.append(element)
-    for element in freq_dict2:
-        for i in range(freq_dict2[element]):
-            L2.append(element)
-    for element in L1:
-        if element not in U:
-            U.append(element)
-    for element in L2:
-        if element not in U:
-            U.append(element)
+    for word in freq_dict1:
+        for i in range(freq_dict1[word]):
+            L1.append(word)
+    for word in freq_dict2:
+        for i in range(freq_dict2[word]):
+            L2.append(word)
+    for word in L1:
+        if word not in U:
+            U.append(word)
+    for word in L2:
+        if word not in U:
+            U.append(word)
 
     def δ(e):
         return abs(count(e, L1) - count(e, L2))
@@ -236,21 +235,25 @@ def get_idf(file_paths):
     """
     docs = []
     docs_words_list = []
-    docs_words_freq_list = []
+    docs_words_freq_list = []  # list of dictionaries of word frequencies for each document
     IDF_dict = {}
     U = []  # Totall uniqe words in documents
     for file_name in file_paths:
+        # load documents content in docs list
         docs.append(load_file(file_name))
-    for doc in docs:
+    for doc in docs:  # for each document in docs
+        # separate words from its content
         docs_words_list.append(text_to_list(doc))
     for words_list in docs_words_list:
         docs_words_freq_list.append(get_frequencies(words_list))
     for words in docs_words_freq_list[0]:
-        U.append(words)
-    for doc in range(1, len(docs_words_freq_list)):
-        for words in docs_words_freq_list[doc]:
-            if words not in U:
-                U.append(words)
+        U.append(words)  # initialize U
+
+    # For every document except the first one.
+    for Di in range(1, len(docs_words_freq_list)):
+        for word in docs_words_freq_list[Di]:
+            if word not in U:
+                U.append(word)
     for word in U:
         count = 0  # number of documents with word w in it
         for Di in range(len(docs_words_freq_list)):
@@ -278,6 +281,7 @@ def get_tfidf(tf_file_path, idf_file_paths):
     TF_IDF = []
     for word in TF_dict:
         TF_IDF.append((word, TF_dict[word]*IDF_dict[word]))
+    # sorted first by value, and then alphabetically if the values are equal.
     TF_IDF.sort(key=lambda x: (x[1], x[0]))
     return TF_IDF
 
@@ -289,12 +293,12 @@ if __name__ == "__main__":
     ###############################################################
 
     # Tests Problem 0: Prep Data
-    test_directory = "tests/student_tests/"
-    hello_world, hello_friend = load_file(
-        test_directory + 'hello_world.txt'), load_file(test_directory + 'hello_friends.txt')
-    world, friend = text_to_list(hello_world), text_to_list(hello_friend)
-    print(world)      # should print ['hello', 'world', 'hello']
-    print(friend)     # should print ['hello', 'friends']
+    # test_directory = "tests/student_tests/"
+    # hello_world, hello_friend = load_file(
+    #     test_directory + 'hello_world.txt'), load_file(test_directory + 'hello_friends.txt')
+    # world, friend = text_to_list(hello_world), text_to_list(hello_friend)
+    # print(world)      # should print ['hello', 'world', 'hello']
+    # print(friend)     # should print ['hello', 'friends']
 
     # Tests Problem 1: Get Frequencies
     # test_directory = "tests/student_tests/"
