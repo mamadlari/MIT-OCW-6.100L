@@ -2,14 +2,17 @@
 # Name:
 # Collaborators:
 
-from tree import Node # Imports the Node object used to construct trees
+from tree import Node  # Imports the Node object used to construct trees
 
 # Part A0: Data representation
-# Fill out the following variables correctly.
-# If correct, the test named test_data_representation should pass.
-tree1 = None #TODO
-tree2 = None #TODO
-tree3 = None #TODO
+
+# initialize
+tree1 = Node(8, Node(2, Node(1), Node(6)), Node(10))
+tree2 = Node(7, Node(2, Node(1), Node(5, Node(3), Node(6))),
+             Node(9, Node(8), Node(10)))
+tree3 = Node(5, Node(3, Node(2), Node(4)),
+             Node(14, Node(12), Node(21, Node(20), Node(26))))
+
 
 def find_tree_height(tree):
     '''
@@ -19,8 +22,17 @@ def find_tree_height(tree):
     Output:
         The integer depth of the tree
     '''
-    # TODO: Remove pass and write your code here
-    pass
+    # if my tree is leaf
+    if tree.get_left_child() is None:
+        if tree.get_right_child() is None:
+            return 0
+    # tree is not leaf
+    else:
+        # save the  height of the sub tree of left and right
+        stree_left = find_tree_height(tree.get_left_child())
+        stree_right = find_tree_height(tree.get_right_child())
+        return max(stree_left, stree_right) + 1
+
 
 def is_heap(tree, compare_func):
     '''
@@ -37,8 +49,9 @@ def is_heap(tree, compare_func):
     pass
 
 
-
 if __name__ == '__main__':
     # You can use this part for your own testing and debugging purposes.
     # IMPORTANT: Do not erase the pass statement below if you do not add your own code
-    pass
+    print(find_tree_height(tree1))  # باید ۲ باشه
+    print(find_tree_height(tree2))  # باید ۳ باشه
+    print(find_tree_height(tree3))  # باید ۳ باشه
