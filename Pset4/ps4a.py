@@ -23,9 +23,8 @@ def find_tree_height(tree):
         The integer depth of the tree
     '''
     # if my tree is leaf
-    if tree.get_left_child() is None:
-        if tree.get_right_child() is None:
-            return 0
+    if tree is None:
+        return -1
     # tree is not leaf
     else:
         # save the  height of the sub tree of left and right
@@ -52,6 +51,4 @@ def is_heap(tree, compare_func):
 if __name__ == '__main__':
     # You can use this part for your own testing and debugging purposes.
     # IMPORTANT: Do not erase the pass statement below if you do not add your own code
-    print(find_tree_height(tree1))  # باید ۲ باشه
-    print(find_tree_height(tree2))  # باید ۳ باشه
-    print(find_tree_height(tree3))  # باید ۳ باشه
+    pass
