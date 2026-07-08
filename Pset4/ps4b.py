@@ -45,20 +45,15 @@ class Message(object):
         Returns: (string) the shifted character with ASCII value in the range [32, 126]
         '''
         asc_char = ord(char)  # char ascci code
-        # handle if the shift wraps around to the start or to the end
         asc_new_char = asc_char+shift
-        print(f"asc_new_char ={asc_new_char}")
+        # handle if the shift wraps around to the start or to the end
         while asc_new_char > 126:
-            print("its biger")
             asc_new_char = 31+(asc_new_char % 126)
-            print(f"asc_new_char ={asc_new_char}")
         while asc_new_char < 32:
-            print("its smaller")
             if asc_new_char < 0:
                 asc_new_char = 127-(32+abs(asc_new_char))
             else:
                 asc_new_char = 127-(32 % asc_new_char)
-            print(f"asc_new_char ={asc_new_char}")
         return chr(asc_new_char)
 
     def apply_pad(self, pad):
@@ -72,7 +67,13 @@ class Message(object):
 
         Returns: (string) The ciphertext produced using the one time pad
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        ciphertext = ""
+        my_message = self.get_text()
+        for i in range(len(my_message)):
+            char = my_message[i]
+            shift = pad[i]
+            ciphertext += self.shift_char(char, shift)
+        return ciphertext
 
 
 class PlaintextMessage(Message):
@@ -176,7 +177,4 @@ class EncryptedMessage(Message):
 
 
 if __name__ == '__main__':
-    m1 = Message("hello")
-    shifts = [('Y', -107, 'M')]
-    for char, shift, exp in shifts:
-        print(f"{exp}={m1.shift_char(char, shift)}")
+    pass
