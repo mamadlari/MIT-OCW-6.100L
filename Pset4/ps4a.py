@@ -22,15 +22,23 @@ def find_tree_height(tree):
     Output:
         The integer depth of the tree
     '''
-    # if my tree is leaf
-    if tree is None:
-        return -1
-    # tree is not leaf
-    else:
-        # save the  height of the sub tree of left and right
-        stree_left = find_tree_height(tree.get_left_child())
+    if tree is not None:
+        left_child = tree.get_left_child()
+        right_child = tree.get_right_child()
+        # The Node is leaf
+        if left_child is None and right_child is None:
+            return 0
+    # The Node is not leaf
+        # save the right and left child heghit subtree
         stree_right = find_tree_height(tree.get_right_child())
-        return max(stree_left, stree_right) + 1
+        stree_left = find_tree_height(tree.get_left_child())
+        if left_child is not None and right_child is not None:
+            return max(stree_left, stree_right) + 1
+        elif right_child is not None:
+            return stree_right + 1
+        # left_child is not None
+        else:
+            return stree_left + 1
 
 
 def is_heap(tree, compare_func):
@@ -44,8 +52,53 @@ def is_heap(tree, compare_func):
     Output:
         True if the entire tree satisfies the compare_func function; False otherwise
     '''
-    # TODO: Remove pass and write your code here
-    pass
+    if tree is not None:
+        left_child = tree.get_left_child()
+        right_child = tree.get_right_child()
+        # The Node is leaf
+        if left_child is None and right_child is None:
+            return True
+        # The Node is not leaf
+            # save the right and left child subtree
+        stree_right = tree.get_right_child()
+        stree_left = tree.get_left_child()
+        if left_child is not None and right_child is not None:
+            # boolian for right and left child is heap or not
+            is_heap_right_child = is_heap(stree_right, compare_func)
+            is_heap_left_child = is_heap(stree_left, compare_func)
+            if is_heap_left_child and is_heap_right_child:
+                # children are ok , now it's parent time
+                lchild_value = stree_left.get_value()
+                rchild_value = stree_right.get_value()
+                pvalue = tree.get_value()
+                return compare_func(lchild_value, pvalue) and compare_func(rchild_value, pvalue)
+            else:
+                return False
+        elif left_child is not None:
+            is_heap_left_child = is_heap(stree_left, compare_func)
+            if is_heap_left_child:
+                lchild_value = stree_left.get_value()
+                pvalue = tree.get_value()
+                return compare_func(lchild_value, pvalue)
+            else:
+                return False
+        else:
+            # right_child is Not None
+            is_heap_right_child = is_heap(stree_right, compare_func)
+            if is_heap_right_child:
+                rchild_value = stree_right.get_value()
+                pvalue = tree.get_value()
+                return compare_func(rchild_value, pvalue)
+            else:
+                return False
+
+# max heap comparator
+
+
+def compare_func(child_value, parent_value):
+    if child_value < parent_value:
+        return True
+    return False
 
 
 if __name__ == '__main__':
