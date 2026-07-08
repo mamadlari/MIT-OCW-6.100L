@@ -15,7 +15,7 @@ class Message(object):
         a Message object has one attribute:
             the message text
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        self.message = input_text
 
     def __repr__(self):
         '''
@@ -32,7 +32,7 @@ class Message(object):
 
         Returns: (string) the message text
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        return self.message
 
     def shift_char(self, char, shift):
         '''
@@ -44,7 +44,10 @@ class Message(object):
 
         Returns: (string) the shifted character with ASCII value in the range [32, 126]
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        asc_char = ord(char)  # char ascci code
+        # handle if the shift wraps around to the start
+        asc_new_char = (asc_char+shift) % 126
+        return chr(asc_new_char)
 
     def apply_pad(self, pad):
         '''
