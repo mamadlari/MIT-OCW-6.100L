@@ -1,6 +1,6 @@
 # Problem Set 4B
-# Name:
-# Collaborators:
+# Name:Mohammad Tolooei
+# Collaborators:No One
 
 import random
 
@@ -46,14 +46,10 @@ class Message(object):
         '''
         asc_char = ord(char)  # char ascci code
         asc_new_char = asc_char+shift
-        # handle if the shift wraps around to the start or to the end
         while asc_new_char > 126:
             asc_new_char = 31+(asc_new_char % 126)
         while asc_new_char < 32:
-            if asc_new_char < 0:
-                asc_new_char = 127-(32+abs(asc_new_char))
-            else:
-                asc_new_char = 127-(32 % asc_new_char)
+            asc_new_char = 127-(32-asc_new_char)
         return chr(asc_new_char)
 
     def apply_pad(self, pad):
@@ -119,7 +115,7 @@ class PlaintextMessage(Message):
         '''
         pad = []
         message = self.get_text()
-        # append random number in range(0,110) for each char
+        # append random number in range(0,110) for each char in pad
         for i in range(len(message)):
             r = random.randint(0, 109)
             pad.append(r)
@@ -166,7 +162,8 @@ class EncryptedMessage(Message):
         an EncryptedMessage object inherits from Message. It has one attribute:
             the message text (ciphertext)
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        super().__init__(input_text)
+        self.input_text = input_text
 
     def __repr__(self):
         '''
@@ -186,7 +183,11 @@ class EncryptedMessage(Message):
 
         Returns: (PlaintextMessage) the decrypted message (containing the pad)
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        new_pad = pad.copy()
+        for i in range(len(pad)):
+            new_pad[i] = -1 * new_pad[i]
+        dmessage = self.apply_pad(new_pad)  # decrypted message
+        return PlaintextMessage(dmessage, pad.copy())
 
 
 if __name__ == '__main__':
