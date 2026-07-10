@@ -95,8 +95,8 @@ class PlaintextMessage(Message):
         if pad is None:
             self.pad = self.generate_pad()
         else:
-            self.pad = pad
-        self.ciphertext = super().apply_pad(pad)
+            self.pad = pad[:]
+        self.ciphertext = super().apply_pad(self.pad)
 
     def __repr__(self):
         '''
@@ -151,7 +151,9 @@ class PlaintextMessage(Message):
 
         Returns: nothing
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        self.pad = new_pad[:]
+        # ciphertext changes becuse pad changes
+        self.ciphertext = super().apply_pad(self.pad)
 
 
 class EncryptedMessage(Message):
