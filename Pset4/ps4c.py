@@ -3,9 +3,11 @@
 # Collaborators:
 
 import json
-import ps4b # Importing your work from Part B
+import ps4b  # Importing your work from Part B
 
 ### HELPER CODE ###
+
+
 def load_words(file_name):
     '''
     file_name (string): the name of the file containing
@@ -92,7 +94,6 @@ def decode_story():
 
     '''
     raise NotImplementedError  # delete this line and replace with your code here
-
 
 
 if __name__ == '__main__':
