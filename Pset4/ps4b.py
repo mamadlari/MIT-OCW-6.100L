@@ -117,7 +117,13 @@ class PlaintextMessage(Message):
 
         Returns: (list of integers) the new one time pad
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        pad = []
+        message = self.get_text()
+        # append random number in range(0,110) for each char
+        for i in range(len(message)):
+            r = random.randint(0, 109)
+            pad.append(r)
+        return pad
 
     def get_pad(self):
         '''
