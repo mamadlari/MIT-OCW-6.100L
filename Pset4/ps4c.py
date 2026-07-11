@@ -98,9 +98,11 @@ def decrypt_message_try_pads(ciphertext, pads):
                 words_dict[word] = 1
             else:
                 words_dict[word] += 1
+        # counting valid words in words_dict
         for w, c in words_dict.items():  # w is word,c is count
             if is_word(valid_words, w):
                 count += c
+        # update max_cout and keep the best plaintext
         if count >= max_count:
             max_count = count
             best_ptm.append(ptm)
@@ -115,11 +117,16 @@ def decode_story():
     Returns: (string) the decoded story
 
     '''
-    raise NotImplementedError  # delete this line and replace with your code here
+    story = get_story_string()
+    pads = get_story_pads()
+    ciphertext = ps4b.EncryptedMessage(story)
+    ptm = decrypt_message_try_pads(
+        ciphertext, pads)  # ptm is plaintext message
+    return ptm.get_text()
 
 
 if __name__ == '__main__':
     # # Uncomment these lines to try running decode_story()
-    # story = decode_story()
-    # print("Decoded story: ", story)
+    story = decode_story()
+    print("Decoded story: ", story)
     pass
