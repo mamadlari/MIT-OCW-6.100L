@@ -6,7 +6,7 @@ This repository contains the complete implementation for **Problem Set 3**, whic
 
 ## Project Structure
 
-* **`ps3.py`:** The main implementation file containing the logic for score calculation, hand updates, word validation, wildcard mechanics, and the interactive gameplay loop.
+* **`document_distance.py`:** The main implementation file containing the logic for score calculation, hand updates, word validation, wildcard mechanics, and the interactive gameplay loop.
 * **`test_ps3.py`:** The student testing suite containing unit tests to validate individual functions like `get_word_score`, `update_hand`, and `is_valid_word`.
 * **`words.txt`:** A plain text file acting as the dictionary database containing a list of over 83,000 valid lowercase English words.
 
