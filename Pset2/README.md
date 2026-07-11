@@ -6,7 +6,7 @@ This repository contains the complete implementation for **Problem Set 2**, whic
 
 ## Project Structure
 
-* **`ps2.py`:** The main implementation file containing the core game logic, user input processing, string formatting routines, and the hint-matching algorithm.
+* **`hangman.py`:** The main implementation file containing the core game logic, user input processing, string formatting routines, and the hint-matching algorithm.
 * **`test_ps2.py`:** The student testing suite containing unit tests to validate individual helper functions.
 * **`words.txt`:** A text file containing a list of over 55,000 valid lowercase English words used as the game's secret word database.
 
