@@ -142,7 +142,14 @@ def extract_end_bits(num_end_bits, pixel):
     Returns:
         The num_end_bits of pixel, as an integer (BW) or tuple of integers (RGB).
     """
-    pass
+    r = 2**num_end_bits  # divisor , without converting a base 10 number into binary
+    if type(pixel) is tuple:
+        R = pixel[0] % r
+        G = pixel[1] % r
+        B = pixel[2] % r
+        # RGB is a LSB for the pixle
+        return (R, G, B)
+    return pixel % r  # pixel is BW
 
 
 def reveal_bw_image(filename):
@@ -153,7 +160,16 @@ def reveal_bw_image(filename):
     Returns:
         result: an Image object containing the hidden image
     """
-    pass
+    im = Image.open(filename)
+    width, height = im.size
+    pixels = img_to_pix(filename)
+    new_pixel = []
+    # extracts the single LSB (1 bit) for each pixel in the BW in good scale
+    for pixel in pixels:
+        LSB = extract_end_bits(1, pixel)
+        LSB = rescale(LSB, 1)
+        new_pixel.append(LSB)
+    return pix_to_img(new_pixel, (width, height), 'L')
 
 
 def reveal_color_image(filename):
@@ -204,6 +220,24 @@ def draw_kerb(filename, kerb):
     new_filename = filename[:idx] + "_kerb" + filename[idx:]
     im.save(new_filename)
     return
+
+
+def rescale(LSB, n):
+    """
+    rescale LSB to range 0 to 255
+    Inputs:
+        LSB: integer for BW pixel , or a tuple for RGB pixel
+        n: number of LSB bits
+    Returns:
+        return a rescaled LSB
+    """
+    mult = 255//(2**n-1)  # scaling factor
+    if type(LSB) == tuple:
+        R = LSB[0]*mult
+        G = LSB[1]*mult
+        B = LSB[2]*mult
+        return (R, G, B)
+    return LSB*mult
 
 
 def main():
