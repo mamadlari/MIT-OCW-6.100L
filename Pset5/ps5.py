@@ -69,7 +69,8 @@ def img_to_pix(filename):
                  in form (R,G,B) such as [(0,0,0),(255,255,255),(38,29,58)...] for RGB image
                  in form L such as [60,66,72...] for BW image
     """
-    pass
+    with Image.open(filename) as im:
+        return (list(im.getdata()))  # return the pixel list from the image
 
 
 def pix_to_img(pixels_list, size, mode):
@@ -88,7 +89,9 @@ def pix_to_img(pixels_list, size, mode):
     returns:
         img: Image object made from list of pixels
     """
-    pass
+    im = Image.new(mode, size)  # create a new empty image
+    im.putdata(pixels_list)
+    return im
 
 
 def filter(pixels_list, color):
@@ -100,7 +103,13 @@ def filter(pixels_list, color):
     returns: list of pixels in same format as earlier functions,
     transformed by matrix multiplication
     """
-    pass
+    m = make_matrix(color)
+    result = []
+    for pixel in pixels_list:
+        L = matrix_multiply(m, pixel)  # L is list of RGB
+        (R, G, B) = (int(L[0]), int(L[1]), int(L[2]))
+        result.append((R, G, B))
+    return result
 
 
 def extract_end_bits(num_end_bits, pixel):
@@ -171,9 +180,9 @@ def reveal_image(filename):
     """
     im = Image.open(filename)
     if im.mode == '1' or im.mode == 'L':
-        return(reveal_bw_image(filename))
+        return (reveal_bw_image(filename))
     elif im.mode == 'RGB':
-        return(reveal_color_image(filename))
+        return (reveal_color_image(filename))
     else:
         raise Exception("Invalid mode %s" % im.mode)
 
@@ -202,25 +211,25 @@ def main():
 
     # Uncomment the following lines to test part 1
 
-    #im = Image.open('image_15.png')
-    #width, height = im.size
-    #pixels = img_to_pix('image_15.png')
+    # im = Image.open('image_15.png')
+    # width, height = im.size
+    # pixels = img_to_pix('image_15.png')
 
-    #non_filtered_pixels = filter(pixels,'none')
-    #im = pix_to_img(non_filtered_pixels, (width, height), 'RGB')
+    # non_filtered_pixels = filter(pixels, 'none')
+    # im = pix_to_img(pixels, (width, height), 'RGB')
     # im.show()
 
-    #red_filtered_pixels = filter(pixels,'red')
-    #im2 = pix_to_img(red_filtered_pixels,(width,height), 'RGB')
+    # red_filtered_pixels = filter(pixels, 'red')
+    # im2 = pix_to_img(red_filtered_pixels, (width, height), 'RGB')
     # im2.show()
 
     # Uncomment the following lines to test part 2
-    #im = reveal_image('hidden1.bmp')
+    # im = reveal_image('hidden1.bmp')
     # im.show()
 
-    #im2 = reveal_image('hidden2.bmp')
+    # im2 = reveal_image('hidden2.bmp')
     # im2.show()
-    
+
 
 if __name__ == '__main__':
     main()
