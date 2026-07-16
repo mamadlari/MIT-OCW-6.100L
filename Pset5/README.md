@@ -36,7 +36,7 @@ Processes each pixel of the stego-images, extracts the hidden bits, rescales the
 ## 🚀 How to Run
 
 1. Make sure you have the required dependencies installed (specifically **Pillow** for image processing):
-   ```bash
+```bash
    pip install Pillow
 
 ```
@@ -65,7 +65,3 @@ To finalize the submission:
 1. Use the helper function `draw_kerb` to apply your unique Kerberos watermark to `image1.png`, `image2.png`, and `image3.png`.
 2. Combine the watermarked images into a single PDF.
 3. **Note:** Remember to comment out any `draw_kerb` function calls in `ps5.py` before submitting to the autograder to prevent testing failures.
-
-```
-
-```
