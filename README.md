@@ -1,5 +1,6 @@
-```markdown
+
 # 🚀 Programming Exercises & Computer Science Problem Sets
+
 
 Hey there! Welcome to this repository. This is a collection of 5 major programming projects (Problem Sets) that scale up from fundamental computer science concepts and algorithms to more advanced topics like AI, image processing, and steganography.
 
@@ -13,22 +14,22 @@ Here is how the entire workspace is organized for easy navigation:
 
 ```text
 .
-├── Pset1/                  # Core concepts and basic algorithms
-│   ├── README.md           # Dedicated README for Pset 1
-│   └── ...
-├── Pset2/                  # Logic games and string manipulation
-│   ├── README.md           # Dedicated README for Pset 2
-│   └── ...
-├── Pset3/                  # Data structures and word games
-│   ├── README.md           # Dedicated README for Pset 3
-│   └── ...
-├── Pset4/                  # Cryptography and Object-Oriented Programming (OOP)
-│   ├── README.md           # Dedicated README for Pset 4
-│   └── ...
-├── Pset5/                  # Image processing and steganography
-│   ├── README.md           # Dedicated README for Pset 5
-│   └── ...
-└── README.md               # Main directory guide (You are here!)
+├── Pset1/                  # Core concepts and basic algorithms
+│   ├── README.md           # Dedicated README for Pset 1
+│   └── ...
+├── Pset2/                  # Logic games and string manipulation
+│   ├── README.md           # Dedicated README for Pset 2
+│   └── ...
+├── Pset3/                  # Data structures and word games
+│   ├── README.md           # Dedicated README for Pset 3
+│   └── ...
+├── Pset4/                  # Cryptography and Object-Oriented Programming (OOP)
+│   ├── README.md           # Dedicated README for Pset 4
+│   └── ...
+├── Pset5/                  # Image processing and steganography
+│   ├── README.md           # Dedicated README for Pset 5
+│   └── ...
+└── README.md               # Main directory guide (You are here!)
 
 ```
 
@@ -82,7 +83,3 @@ python ps5.py
 ```
 
 *Have fun exploring the code! If you have any questions or want to dive deeper into the technical implementation, the dedicated READMEs are your best bet.*
-
-```
-
-```
