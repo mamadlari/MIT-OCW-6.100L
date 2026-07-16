@@ -180,7 +180,16 @@ def reveal_color_image(filename):
     Returns:
         result: an Image object containing the hidden image
     """
-    pass
+    im = Image.open(filename)
+    width, height = im.size
+    pixels = img_to_pix(filename)
+    new_pixel = []
+    # extracts the single LSB (3 bits) for each pixel in the RGB in good scale
+    for pixel in pixels:
+        LSB = extract_end_bits(3, pixel)
+        LSB = rescale(LSB, 3)
+        new_pixel.append(LSB)
+    return pix_to_img(new_pixel, (width, height), 'RGB')
 
 
 def reveal_image(filename):
@@ -231,13 +240,13 @@ def rescale(LSB, n):
     Returns:
         return a rescaled LSB
     """
-    mult = 255//(2**n-1)  # scaling factor
-    if type(LSB) == tuple:
-        R = LSB[0]*mult
-        G = LSB[1]*mult
-        B = LSB[2]*mult
+    mult = 255/(2**n-1)  # scaling factor
+    if type(LSB) is tuple:
+        R = int(LSB[0]*mult)
+        G = int(LSB[1]*mult)
+        B = int(LSB[2]*mult)
         return (R, G, B)
-    return LSB*mult
+    return int(LSB*mult)
 
 
 def main():
@@ -245,24 +254,27 @@ def main():
 
     # Uncomment the following lines to test part 1
 
-    # im = Image.open('image_15.png')
-    # width, height = im.size
-    # pixels = img_to_pix('image_15.png')
+    im = Image.open('image_15.png')
+    width, height = im.size
+    pixels = img_to_pix('image_15.png')
 
     # non_filtered_pixels = filter(pixels, 'none')
     # im = pix_to_img(pixels, (width, height), 'RGB')
     # im.show()
 
-    # red_filtered_pixels = filter(pixels, 'red')
-    # im2 = pix_to_img(red_filtered_pixels, (width, height), 'RGB')
+    red_filtered_pixels = filter(pixels, 'red')
+    im2 = pix_to_img(red_filtered_pixels, (width, height), 'RGB')
     # im2.show()
-
+    im2.save('image3.png')
     # Uncomment the following lines to test part 2
-    # im = reveal_image('hidden1.bmp')
+    im = reveal_image('hidden1.bmp')
     # im.show()
+    im.save('image1.png')
 
-    # im2 = reveal_image('hidden2.bmp')
+    im2 = reveal_image('hidden2.bmp')
     # im2.show()
+    im2.save('image2.png')
+    draw_kerb('image2.png', "Mohammad Tolooei")
 
 
 if __name__ == '__main__':
