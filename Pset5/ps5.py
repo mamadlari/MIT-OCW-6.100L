@@ -1,7 +1,7 @@
 """
 # Problem Set 5
-# Name:
-# Collaborators:
+# Name:Mohammad Tolooei
+# Collaborators:No One
 """
 
 from PIL import Image, ImageFont, ImageDraw
