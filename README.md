@@ -1,68 +1,88 @@
-# 💻 پروژه‌های درس MIT 6.100A (مجموعه تمرین‌های ۱، ۲ و ۳)
+```markdown
+# 🚀 Programming Exercises & Computer Science Problem Sets
 
-این مخزن شامل حل تمرین‌های (Problem Sets) درس مقدمه‌ای بر علوم کامپیوتر و برنامه‌نویسی با پایتون دانشگاه MIT است.
+Hey there! Welcome to this repository. This is a collection of 5 major programming projects (Problem Sets) that scale up from fundamental computer science concepts and algorithms to more advanced topics like AI, image processing, and steganography.
 
----
-
-## 📌 مجموعه تمرین ۱: برنامه‌ریزی مالی و پس‌انداز (Problem Set 1)
-
-این تمرین روی محاسبات مالی، مدیریت حلقه‌ها و استفاده از الگوریتم **جستجوی دودویی (Bisection Search)** تمرکز داره.
-
-### بخش‌ها:
-
-* **بخش الف (Part A):** محاسبه تعداد ماه‌های مورد نیاز برای جمع‌آوری پول پیش‌پرداخت خرید خانه با فرض ثابت بودن حقوق.
-* **بخش ب (Part B):** توسعه برنامه بخش اول با در نظر گرفتن افزایش حقوق شش‌ماهه (`semi_annual_raise`).
-* **بخش ج (Part C):** پیدا کردن کمترین نرخ بازدهی سرمایه‌گذاری (`r`) با استفاده از **جستجوی دودویی** برای رسیدن به پیش‌پرداخت خانه‌ی ۸۰۰,۰۰۰ دلاری در ۳۶ ماه.
-
-### فایل‌ها:
-
-* `ps1a.py` | `ps1b.py` | `ps1c.py`
+Each directory is completely self-contained and features its own **dedicated README** detailing the technical specs, execution guide, and specific outputs for that section.
 
 ---
 
-## 🎮 مجموعه تمرین ۲: بازی هنگ‌من / حدس کلمه (Problem Set 2)
+## 📁 Directory Structure
 
-این تمرین شامل پیاده‌سازی کامل بازی کلاسیک و تعاملی هنگ‌من (Hangman) در محیط ترمینال هست که با توابع کمکی مجزا طراحی شده.
+Here is how the entire workspace is organized for easy navigation:
 
-### ویژگی‌های کلیدی:
+```text
+.
+├── Pset1/                  # Core concepts and basic algorithms
+│   ├── README.md           # Dedicated README for Pset 1
+│   └── ...
+├── Pset2/                  # Logic games and string manipulation
+│   ├── README.md           # Dedicated README for Pset 2
+│   └── ...
+├── Pset3/                  # Data structures and word games
+│   ├── README.md           # Dedicated README for Pset 3
+│   └── ...
+├── Pset4/                  # Cryptography and Object-Oriented Programming (OOP)
+│   ├── README.md           # Dedicated README for Pset 4
+│   └── ...
+├── Pset5/                  # Image processing and steganography
+│   ├── README.md           # Dedicated README for Pset 5
+│   └── ...
+└── README.md               # Main directory guide (You are here!)
 
-* **توابع کمکی:** پیاده‌سازی توابع بررسی وضعیت برنده شدن بازیکن (`has_player_won`)، نمایش کلمه با ستاره (`get_word_progress`) و مدیریت حروف باقی‌مانده الفبا (`get_available_letters`).
-* **مدیریت حدس‌ها:** کسر حدس‌ها بر اساس حروف صدادار (۲ حدس) و بی‌صدا (۱ حدس) در صورت حدس اشتباه. ورودی‌های تکراری یا نامعتبر جریمه‌ای ندارن.
-* **قابلیت راهنما (With Help):** اگر بازی در حالت راهنما اجرا بشه، کاربر می‌تونه با وارد کردن کاراکتر `!` یکی از حروف مخفی کلمه را به صورت تصادفی و با هزینه کردن ۳ حدس آشکار کنه.
-* **سیستم امتیازدهی:** محاسبه امتیاز نهایی کاربر در صورت برد بر اساس حدس‌های باقی‌مانده، طول کلمه و تعداد حروف منحصربه‌فرد آن.
-
-### فایل‌ها:
-
-* `hangman.py` | `words.txt`
+```
 
 ---
 
-## 📄 مجموعه تمرین ۳: محاسبه شباهت متون (Problem Set 3 - Document Distance)
+## 🧭 Project Roadmap & Quick Links
 
-این تمرین روی استفاده از **دیکشنری‌ها (Dictionaries)** در پایتون و پیاده‌سازی معیارهای متنی برای سنجش میزان شباهت بین دو متن یا دو کلمه تمرکز داره.
+To explore how each project works and check out the code, click the links below to hop straight to the dedicated README for each Pset:
 
-### ویژگی‌های کلیدی:
+### 🔹 [Problem Set 1]
 
-* **آماده‌سازی داده‌ها (`text_to_list`):** تبدیل رشته‌ی متنی ورودی به یک لیست تمیز از کلمات بدون علائم نگارشی برای پردازش‌های بعدی.
-* **محاسبه فرکانس‌ها (`get_frequencies` و `get_letter_frequencies`):** شمارش تعداد تکرار کلمات در متن یا حروف در کلمه و ذخیره آن‌ها در قالب دیکشنری (نگاشت المان به تعداد تکرار).
-* **سنجش شباهت (`calculate_similarity_score`):** محاسبه امتیاز شباهت بین دو سند (عددی بین ۰ و ۱) بر اساس تفاوت فرکانس‌ها و مجموع کل کلمات، همراه با گرد کردن خروجی تا دو رقم اعشار.
-* **یافتن کلمات کلیدی (`get_most_frequent_words`):** استخراج پرتکرارترین کلمات در مجموعِ دو متن، با قابلیت مرتب‌سازی حروف الفبا در صورت هم‌امتیاز بودن کلمات.
-* **الگوریتم TF-IDF:** پیاده‌سازی معیارهای فرکانس کلمه (Term Frequency) و معکوس فرکانس متن (Inverse Document Frequency) با استفاده از لگاریتم مبنای ۱۰ (`math.log10`) برای سنجش اهمیت و میزان کمیاب بودن کلمات در چندین سند متنی مختلف.
+* **Topic:** Financial calculations, housing savings, and Bisection Search.
+* **Overview:** Explores how to use binary search to optimize and speed up complex mathematical calculations.
 
-### فایل‌ها:
+### 🔹 [Problem Set 2]
 
-* `document_distance.py`: فایل اصلی شامل منطق برنامه‌ها، توابع محاسباتی و فرمول‌های آماری متن
-* `test_ps3_student.py`: فایل تستر برای ارزیابی و تست خودکار صحت عملکرد توابع نوشته شده
+* **Topic:** Designing and building the classic Hangman game.
+* **Overview:** Focuses on conditional logic, text processing, and handling user inputs interactively in the terminal.
 
-## 🚀 نحوه اجرا
+### 🔹 [Problem Set 3]
 
-برای اجرای برنامه‌ها یا تسترها، دستورات زیر را در ترمینال وارد کنید:
+* **Topic:** Simulating a word-building game (similar to Scrabble).
+* **Overview:** Deep dive into working with dictionaries, managing player hands, and writing clean, modular code.
+
+### 🔹 [Problem Set 4]
+
+* **Topic:** Caesar and Substitution Ciphers.
+* **Overview:** Implementation of Object-Oriented Programming (OOP) in Python, focusing on class inheritance, encryption, and decryption methods.
+
+### 🔹 [Problem Set 5]
+
+* **Topic:** Pixel filters and Least Significant Bit (LSB) Steganography.
+* **Overview:** Extracting hidden data from grayscale and RGB carrier files to recover secret images (`image2.png` and `image3.png`) using math-based contrast rescaling.
+
+---
+
+## ⚙️ Quick Start & Setup
+
+To run or test a specific project, navigate to its folder and execute the test suite or main script:
 
 ```bash
-# اجرای بازی هنگ‌من
-python hangman.py
+# Go to the Problem Set 5 directory as an example
+cd Pset5
 
-# اجرای تستر مجموعه تمرین سوم
-python test_ps3_student.py
+# Run the student test suite to verify code logic
+python test_ps5_student.py
+
+# Run the main program to generate the output files
+python ps5.py
+
+```
+
+*Have fun exploring the code! If you have any questions or want to dive deeper into the technical implementation, the dedicated READMEs are your best bet.*
+
+```
 
 ```
